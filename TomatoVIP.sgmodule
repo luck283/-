@@ -1,10 +1,16 @@
 [Module]
-name = TomatoVIP
+name = 🍅 Tomato Novel v6.5.9 – VIP+AdBlock+Notify
+version = 1.3
 author = luck283
-description = 去广告 + VIP 伪装（番茄小说）
-version = 1.0
-scriptings = tomato-vip.js
-mitm = *.tomatoxs.com
+description = 去广告 + 伪装 VIP（自动弹窗提示）
+update-interval = 86400
+homepage = https://github.com/luck283/TomatoNovel-Module
+
+[Rewrite]
+^https:\/\/(ad|launch|config)\.tomatotxt\.com\/.* url reject
+^https:\/\/.*\.tomatotxt\.com\/(splash|advert|preload|startup|feeds)\/.* url reject
+
+^https:\/\/api6-normal\.tomatotxt\.com\/user\/info url script-response-body https://luck283.github.io/TomatoNovel-Module/local-scripts/TomatoVIP_659_notify.js
 
 [Script]
-tomato-vip.js = type=http-response,pattern=^https:\/\/(.*)\.tomatoxs\.com\/(resource|vip\/user\/info),requires-body=1,max-size=0,script-path=https://example.com/tomato-vip.js
+https://luck283.github.io/TomatoNovel-Module/local-scripts/TomatoVIP_659_notify.js = type=http-response,pattern=^https:\/\/api6-normal\.tomatotxt\.com\/user\/info,requires-body=true
