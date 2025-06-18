@@ -1,0 +1,10 @@
+[Module]
+name = TomatoVIP
+author = luck283
+description = 去广告 + VIP 伪装（番茄小说）
+version = 1.0
+scriptings = tomato-vip.js
+mitm = *.tomatoxs.com
+
+[Script]
+tomato-vip.js = type=http-response,pattern=^https:\/\/(.*)\.tomatoxs\.com\/(resource|vip\/user\/info),requires-body=1,max-size=0,script-path=https://example.com/tomato-vip.js
