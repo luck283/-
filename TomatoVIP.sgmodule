@@ -13,4 +13,4 @@ homepage = https://github.com/luck283/TomatoNovel-Module
 ^https:\/\/api6-normal\.tomatotxt\.com\/user\/info url script-response-body https://luck283.github.io/TomatoNovel-Module/local-scripts/TomatoVIP_659_notify.js
 
 [Script]
-https://luck283.github.io/TomatoNovel-Module/local-scripts/TomatoVIP_659_notify.js = type=http-response,pattern=^https:\/\/api6-normal\.tomatotxt\.com\/user\/info,requires-body=true
+https://github.com/luck283/-/blob/main/tomato-vip.js = type=http-response,pattern=^https:\/\/api6-normal\.tomatotxt\.com\/user\/info,requires-body=true
