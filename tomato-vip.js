@@ -1,31 +1,39 @@
-// tomato-vip.js
-let body = $response.body;
-let url = $request.url;
+// TomatoVIP_659_notify.js
+// 版本：v1.3 | 作者：luck283 & ChatGPT | 支持小火箭/Surge
 
-if (url.includes('/vip/user/info')) {
-    let obj = JSON.parse(body);
-    obj.data = {
-        ...obj.data,
-        is_vip: true,
-        vip_expire_time: "2099-12-31 23:59:59",
-        is_svip: true,
-        svip_expire_time: "2099-12-31 23:59:59"
-    };
-    $done({
-        body: JSON.stringify(obj)
-    });
-} else if (url.includes('/resource')) {
-    // 屏蔽广告资源
-    $done({
-        body: JSON.stringify({
-            code: 0,
-            data: [],
-            msg: "广告已清空"
-        })
-    });
-} else {
+try {
+  let body = JSON.parse($response.body);
+  const nickname = body?.data?.nickname || "用户";
+
+  // 安全检查
+  if (!body?.data || typeof body.data !== 'object') {
+    console.log("❌ data 节点不存在或格式不对");
     $done({});
-}
+    return;
+  }
 
-// 弹窗提醒
-$notify("番茄小说VIP模块已运行", "成功伪装VIP+去广告");
+  // 若已是 VIP，则提示无需重复设置
+  if (body.data?.isVip === true) {
+    console.log("✅ 已是 VIP 用户，无需重复设置");
+    $notify("🍅 TomatoVIP", "", `${nickname} 已是 VIP 用户`);
+    $done({ body: JSON.stringify(body) });
+    return;
+  }
+
+  // 开始伪装 VIP
+  body.data.isVip = true;
+  body.data.vipLevel = 6;
+  body.data.vipExpireTime = "2099-12-31 23:59:59";
+  body.data.adFree = true;
+  body.data.freeBookCount = 999;
+  body.data.readCoupons = 9999;
+  body.data.nickname = nickname + "💎VIP";
+
+  console.log("🎉 TomatoVIP 伪装完成，VIP等级6，有效期2099-12-31");
+
+  $notify("🎉 TomatoVIP 脚本执行成功", `${nickname} 已伪装为 VIP`, "等级6｜到期：2099-12-31");
+  $done({ body: JSON.stringify(body) });
+} catch (e) {
+  console.log("❌ TomatoVIP 脚本运行出错：" + e);
+  $done({});
+}
