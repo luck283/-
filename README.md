@@ -6,7 +6,3 @@
 
 - `TomatoNovel_6.5.9.module`：规则配置文件，用于加载脚本与广告拦截
 - `local-scripts/TomatoVIP_659_notify.js`：脚本伪装 VIP 身份并弹窗通知
-
-## 🚀 使用方法
-
-1. 前往 GitHub Pages 地址：
